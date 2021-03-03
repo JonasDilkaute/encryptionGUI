@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="PermutationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="830.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="12.0" layoutY="14.0" prefHeight="89.0" prefWidth="708.0" styleClass="pane-card">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="PERMUTATION ENCRYPTION">
+               <font>
+                  <Font name="Consolas Bold" size="28.0" />
+               </font>
+            </Label>
+            <Label layoutX="20.0" layoutY="54.0" styleClass="label-description" text="Simple but also unsecure." />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="123.0" prefHeight="161.0" prefWidth="708.0" styleClass="pane-card">
+         <children>
+            <FontAwesomeIconView glyphName="FEMALE" layoutX="14.0" layoutY="128.0" size="80" text="" wrappingWidth="71.42857360839844" />
+            <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="PLAIN TEXT" />
+            <TextField fx:id="permutationDecryptionField" layoutX="154.0" layoutY="56.0" prefHeight="89.0" prefWidth="518.0" />
+            <Label layoutX="69.0" layoutY="130.0" styleClass="label-description" text="Alice" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="411.0" prefHeight="161.0" prefWidth="708.0" styleClass="pane-card">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ENCRYPTED TEXT" />
+            <TextField fx:id="permutationEncryptionField" layoutX="154.0" layoutY="56.0" prefHeight="89.0" prefWidth="518.0" />
+            <Label layoutX="69.0" layoutY="130.0" styleClass="label-description" text="Bob" />
+            <FontAwesomeIconView glyphName="MALE" layoutX="14.0" layoutY="129.0" size="80" />
+         </children>
+      </Pane>
+      <Pane layoutX="14.0" layoutY="293.0" prefHeight="108.0" prefWidth="708.0" styleClass="pane-card">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ENCRYPTION KEY" />
+            <TextField fx:id="permutationKeyField" layoutX="282.0" layoutY="26.0" prefHeight="57.0" prefWidth="389.0" />
+            <FontAwesomeIconView glyphName="KEY" layoutX="24.0" layoutY="88.0" size="40" />
+            <Label layoutX="77.0" layoutY="75.0" text="Key" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

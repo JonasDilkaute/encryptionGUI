@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="AboutPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="850.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="6.0" layoutY="4.0" prefHeight="266.0" prefWidth="835.0" styleClass="pane-card">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" styleClass="label-generate" text="ENCRYPTION GUI V1" />
+            <Label layoutX="14.0" layoutY="91.0" styleClass="label-algorithm" text="Author" />
+            <Label layoutX="14.0" layoutY="48.0" styleClass="label-description" text="A simple GUI to present diffrent Encryptions." />
+            <Label layoutX="14.0" layoutY="123.0" styleClass="label-description" text="Jonas Dilkaute " />
+            <Label layoutX="14.0" layoutY="173.0" styleClass="label-algorithm" text="Version" />
+            <Label layoutX="14.0" layoutY="203.0" styleClass="label-description" text="1.0 / 18.05.2020" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

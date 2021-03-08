@@ -24,7 +24,7 @@ public class TableBuilder<E> {
 	public TableBuilder (TableView<E> tableView, ObservableList<E> data) {
 	
 		for(TableColumn<E, ?> column: tableView.getColumns() ) {
-			column.impl_setFixed(false);
+			//column.impl_setFixed(false);
 			column.setResizable(false);
 			column.setEditable(false);
 			columnsList.add(column);

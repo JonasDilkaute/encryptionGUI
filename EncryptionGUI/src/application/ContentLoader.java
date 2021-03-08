@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 public class ContentLoader {
 	
 	private static ArrayList<AnchorPane> contentPanes = new ArrayList<AnchorPane>();
-	private static  String[] paths = {"CaesarPane", "VigenerePane", "RSAPane","AboutPane"};
+	private static  String[] paths = {"CaesarPane", "VigenerePane", "PermutationPane","RSAPane","AboutPane"};
 
 	/**
 	 * loads the FMXL files with the given Controller

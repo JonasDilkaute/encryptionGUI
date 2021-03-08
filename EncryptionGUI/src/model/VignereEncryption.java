@@ -1,5 +1,7 @@
 package model;
 
+import java.util.stream.Stream;
+
 /**
  * Class that contains methods to encrypt and decrypt with the vigenere encryption.
  * @author Jonas Dilkaute
@@ -96,6 +98,15 @@ public class VignereEncryption implements SymmetricEncryptor {
 	 */
 	public String decrypt(String text, String key) {
 		return decrypt(text, key.toCharArray());
+	}
+	
+	public String convert(String text) {
+		if(text != null && !text.isBlank()) {
+			text.replaceAll("ä", "ae");
+			text.replaceAll("ö", "oe");
+			text.replaceAll("ü", "ue");
+		}
+		return text;
 	}
 
 	/**

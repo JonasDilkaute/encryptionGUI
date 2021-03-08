@@ -70,7 +70,8 @@ public class TextFieldBuilder {
 		
 		UnaryOperator<Change> inputFilter = change2 -> {
 			String newText = change2.getControlNewText();
-			if (newText.matches("[a-zA-Z]*")) {
+			//change it!
+			if (true) {
 				change2.setText(change2.getText().toUpperCase());
 				return change2;
 			}

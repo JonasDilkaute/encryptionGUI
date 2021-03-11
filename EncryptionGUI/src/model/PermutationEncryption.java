@@ -22,11 +22,14 @@ public class PermutationEncryption implements SymmetricEncryptor {
 	public String encrypt(String text) {
 		if(text!= null && !text.isBlank()) {
 			text = text.toUpperCase();
+			text =text.replaceAll("Ä", "AE");
+			text =text.replaceAll("Ü", "UE");
+			text =text.replaceAll("Ö", "OE");
 			String newText = "";
 			char[] array = text.toCharArray();
 			for(int i=0; i< array.length; i++) {
 				int c = (int) array[i] - 65;
-				if(c >= 0 && c<= 26) {					
+				if(c >= 0 && c< 26) {					
 					newText = newText + key.get(c);
 				} else {
 					newText = newText + array[i];
@@ -45,7 +48,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
 			char[] array = text.toCharArray();
 			for(int i=0; i< array.length; i++) {
 				int c = (int) array[i] - 65;
-				if(c >= 0 && c<= 26) {
+				if(c >= 0 && c< 26) {
 					newText = newText+ (char) (key.indexOf(array[i]) +65);
 				} else {
 					newText = newText + array[i];
@@ -62,12 +65,11 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		List<Pair<Character,Integer>> list = new ArrayList<>();
 		if(text!= null && !text.isBlank()) {
 			text = text.toUpperCase();
-			String newText = "";
 			char[] array = text.toCharArray();
 			for(int i=0; i< array.length; i++) {
 				int c = (int) array[i] - 65;
-				if(c >= 0 && c<= 26) {
-					addCount(list, array[i]);
+				if(c >= 0 && c< 26) {
+					list = addCount(list, array[i]);
 				} 
 		}
 			for(Pair p: list) {
@@ -82,12 +84,21 @@ public class PermutationEncryption implements SymmetricEncryptor {
 	public List<Character> estimateKey(String text) {
 		List<Pair<Character,Integer>> list = frequency(text);
 		List<Character> ekey = new ArrayList<Character>();
+		for(int i=0; i<26;i++) {
+			ekey.add((char) ('A'+i));
+		}
 		Collections.sort(list, Comparator.comparing(p->p.getValue()));
+		Collections.reverse(list);
 		for(int i=0; i<list.size();i++) {
 			Character a = h[i];
 			int pa = a - 65;
 			ekey.set(pa, list.get(i).getKey());
 		}
+		System.out.println("---------ekey---------");
+		for(Character c: ekey) {
+			System.out.print(c +", ");
+		}
+		System.out.println("---------------------");
 		return ekey;
 	}
 	
@@ -96,7 +107,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
 			Pair<Character,Integer> p = list.get(i);
 			if(p.getKey().equals(c)) {
 				int count = p.getValue() + 1;
-				list.set(i, new Pair(p.getKey(),count));
+				list.set(i, new Pair(c,count));
 				return list;
 			} 
 		}

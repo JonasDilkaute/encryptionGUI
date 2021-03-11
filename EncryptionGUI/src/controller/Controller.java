@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import model.CaesarEncryption;
@@ -35,7 +37,7 @@ public class Controller  {
 	public void init() {
 		new TextFieldBuilder(new CaesarEncryption(1), caesarEncryptionField, caesarDecryptionField, caesarKeyField, true);	
 		new TextFieldBuilder(new VignereEncryption(c),vigenereEncryptionField, vigenereDecryptionField, vigenereKeyField, false);	
-		new TextfieldBuilder2(new PermutationEncryption(""), permutationEncryptionField, permutationDecryptionField, permutationKeyField, true);
+		new TextfieldBuilder2(new PermutationEncryption(new ArrayList<Character>()), permutationEncryptionField, permutationDecryptionField, permutationKeyField, true);
 		new AsymetricTextFieldBuilder(new RSAEncryption(), RSADecryptionField, RSAEncryptionField, new RsaKeyGenerator().generateRsaKeySet("Max Mustermann"));
 	}
 	

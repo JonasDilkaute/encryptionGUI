@@ -1,18 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="PermutationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="799.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="PermutationPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="799.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <ScrollPane layoutX="14.0" layoutY="199.0" prefHeight="401.0" prefWidth="764.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="840.0" prefWidth="743.0">
+               <children>
+                  <Pane layoutX="18.0" layoutY="14.0" prefHeight="89.0" prefWidth="708.0" styleClass="pane-card">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ENCRYPTION KEY" />
+                        <FontAwesomeIconView glyphName="KEY" layoutX="20.0" layoutY="78.0" size="40" />
+                        <Label layoutX="71.0" layoutY="64.0" text="Key" />
+                        <TextField fx:id="keyTextField" layoutX="197.0" layoutY="37.0" prefHeight="33.0" prefWidth="475.0" text="BCDEFGHIJKLMNOPQRSTUVWXYZA" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="18.0" layoutY="223.0" prefHeight="310.0" prefWidth="708.0" styleClass="pane-card">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="PLAIN TEXT" />
+                        <TextArea fx:id="plainTextArea" layoutX="15.0" layoutY="49.0" prefHeight="250.0" prefWidth="679.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="14.0" layoutY="533.0" prefHeight="310.0" prefWidth="708.0" styleClass="pane-card">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ENCRYPTED TEXT" />
+                        <TextArea fx:id="encryptedTextArea" layoutX="15.0" layoutY="49.0" prefHeight="250.0" prefWidth="679.0" />
+                     </children>
+                  </Pane>
+                  <Pane layoutX="18.0" layoutY="112.0" prefHeight="89.0" prefWidth="708.0" styleClass="pane-card">
+                     <children>
+                        <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ANALYSIS" />
+                        <TableView fx:id="analysisTable" layoutX="168.0" layoutY="7.0" prefHeight="75.0" prefWidth="505.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="C1" />
+                              <TableColumn prefWidth="75.0" text="C2" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
       <Pane layoutX="14.0" layoutY="14.0" prefHeight="89.0" prefWidth="708.0" styleClass="pane-card">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="PERMUTATION ENCRYPTION">
@@ -23,49 +63,11 @@
             <Label layoutX="20.0" layoutY="54.0" styleClass="label-description" text="Simple but also unsecure." />
          </children>
       </Pane>
-      <Pane layoutX="14.0" layoutY="110.0" prefHeight="130.0" prefWidth="708.0" styleClass="pane-card">
-         <children>
-            <FontAwesomeIconView glyphName="FEMALE" layoutX="19.0" layoutY="84.0" size="40" text="" wrappingWidth="71.42857360839844" />
-            <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="PLAIN TEXT" />
-            <TextField fx:id="permutationDecryptionField" layoutX="184.0" layoutY="14.0" prefHeight="89.0" prefWidth="488.0" />
-            <Label layoutX="55.0" layoutY="71.0" styleClass="label-description" text="Alice" />
-         </children>
-      </Pane>
-      <Pane layoutX="14.0" layoutY="249.0" prefHeight="89.0" prefWidth="708.0" styleClass="pane-card">
-         <children>
-            <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ENCRYPTION KEY" />
-            <TextField fx:id="permutationKeyField" layoutX="279.0" layoutY="26.0" prefHeight="46.0" prefWidth="389.0" />
-            <FontAwesomeIconView glyphName="KEY" layoutX="20.0" layoutY="78.0" size="40" />
-            <Label layoutX="71.0" layoutY="64.0" text="Key" />
-         </children>
-      </Pane>
-      <Pane layoutX="14.0" layoutY="345.0" prefHeight="130.0" prefWidth="708.0" styleClass="pane-card">
-         <children>
-            <FontAwesomeIconView glyphName="MALE" layoutX="19.0" layoutY="84.0" size="40" text="" wrappingWidth="71.42857360839844" />
-            <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ENCRYPTED TEXT" />
-            <TextField fx:id="permutationEncryptionField" layoutX="184.0" layoutY="14.0" prefHeight="89.0" prefWidth="488.0" />
-            <Label layoutX="55.0" layoutY="71.0" styleClass="label-description" text="Bob" />
-         </children>
-      </Pane>
-      <ScrollPane layoutX="14.0" layoutY="486.0" prefHeight="198.0" prefWidth="708.0">
-         <content>
-            <Pane prefHeight="95.0" prefWidth="656.0" styleClass="pane-card">
-               <children>
-                  <Label layoutX="14.0" layoutY="14.0" styleClass="label-algorithm" text="ANALYSIS" />
-                  <Label layoutX="120.0" layoutY="17.0" styleClass="label-description" text="Frequency" />
-                  <TableView layoutX="14.0" layoutY="50.0" prefHeight="89.0" prefWidth="586.0">
-                    <columns>
-                      <TableColumn prefWidth="35.0" text="A" />
-                      <TableColumn prefWidth="37.0" text="B" />
-                        <TableColumn prefWidth="153.0" text="C" />
-                    </columns>
-                  </TableView>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Pane>
-         </content>
-      </ScrollPane>
+      <Button fx:id="encryptButton" layoutX="28.0" layoutY="138.0" mnemonicParsing="false" onAction="#encrypt" text="Verschlüsseln" />
+      <Button fx:id="decryptButton" layoutX="129.0" layoutY="138.0" mnemonicParsing="false" onAction="#decrypt" text="Entschlüsseln" />
+      <Button fx:id="analyseButton" layoutX="225.0" layoutY="138.0" mnemonicParsing="false" onAction="#analyse" text="Analysieren" />
+      <Button fx:id="swapButton" layoutX="640.0" layoutY="138.0" mnemonicParsing="false" onAction="#swap" text="Vertauschen" />
+      <TextField fx:id="swapATextField" layoutX="408.0" layoutY="134.0" prefHeight="33.0" prefWidth="69.0" promptText="Key a" />
+      <TextField fx:id="swapBTextField" layoutX="490.0" layoutY="134.0" prefHeight="33.0" prefWidth="69.0" promptText="Key b" />
    </children>
 </AnchorPane>

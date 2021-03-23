@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import model.FrequencyData;
 
 /**
  * Class that build a new TableView
@@ -20,12 +22,22 @@ public class TableBuilder<E> {
 	 * @param tableView the tableView
 	 * @param data the data that should be content in this table
 	 */
-	@SuppressWarnings("deprecation")
 	public TableBuilder (TableView<E> tableView, ObservableList<E> data) {
 	
+		/*
 		for(TableColumn<E, ?> column: tableView.getColumns() ) {
 			//column.impl_setFixed(false);
 			column.setResizable(false);
+			column.setEditable(true);
+			columnsList.add(column);
+		}
+		*/
+		for(int i=0; i<26;i++ ) {
+			TableColumn<E, String> column = new TableColumn<>("" + ((char) (i + 65)));
+			column.setCellValueFactory(new PropertyValueFactory<E, String>("key"));
+			//column.impl_setFixed(false);
+			column.setResizable(false);
+			column.setMaxWidth(26);
 			column.setEditable(false);
 			columnsList.add(column);
 		}

@@ -96,6 +96,17 @@ public class PermutationEncryption implements SymmetricEncryptor {
 	} 
 
 	
+	public void replace(Character keyCharacter, Character plainCharacter) {
+		Character a = plainCharacter;
+		int pa = a - 65;
+		Character dummy =key.get(pa);
+		int pc =key.indexOf(keyCharacter);
+		key.set(pa, keyCharacter);
+		key.set(pc, dummy);
+		//System.out.println("Postion: " + pa +  "Key "+ startFrequency.get(i).getKey());
+		
+	}
+	
 	public void swapLetters(Character a, Character b) {
 		int positionA = key.indexOf(a);
 		int positionB = key.indexOf(b);

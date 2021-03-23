@@ -17,9 +17,9 @@ public class FrequencyData implements Serializable {
 	private SimpleStringProperty letter;
 	
 	public FrequencyData(String key, String letter, double frequency) {
-		setFrequency(frequency);
-		setKey(key);
-		setLetter(letter);
+		this.frequency = new SimpleDoubleProperty(frequency);
+		this.key = new SimpleStringProperty(key);
+		this.letter = new SimpleStringProperty(letter);
 	}
 
 	/**

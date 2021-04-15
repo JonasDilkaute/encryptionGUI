@@ -10,12 +10,10 @@ import javafx.util.Pair;
 
 public class PermutationEncryption implements SymmetricEncryptor {
 
-	private List<Character> key;
+	private List<Character> key = new ArrayList<Character>();
 	private Character[] f = {'E','N','I','S','R','A','T','D','H','U','L','C','G','M','O','B','W','F','K','Z','P','V','J','Y', 'X', 'Q'};
 	private Character[] startF = {'D', 'S', 'I', 'W'}; 
-	//private Character[] startF = {'D', 'S', 'I'};
 	private Character[] endF = {'N', 'E', 'R', 'T', 'S'};
-	//private Character[] endF = {'N', 'E'};
  	public PermutationEncryption(List<Character> key) {
 		setKey(key);
 	}
@@ -84,12 +82,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
 						endChar = array[i];
 					} 
 				}				
-		}
-			System.out.println("-----End -freqency-----");
-			for(Pair<Character,Integer> p: list) {
-				System.out.println("Buchstabe " + p.getKey()+" " + p.getValue());
-			}
-			
+		}	
 		return list;
 	}
 		return null;
@@ -97,14 +90,15 @@ public class PermutationEncryption implements SymmetricEncryptor {
 
 	
 	public void replace(Character keyCharacter, Character plainCharacter) {
-		Character a = plainCharacter;
-		int pa = a - 65;
-		Character dummy =key.get(pa);
-		int pc =key.indexOf(keyCharacter);
-		key.set(pa, keyCharacter);
-		key.set(pc, dummy);
-		//System.out.println("Postion: " + pa +  "Key "+ startFrequency.get(i).getKey());
-		
+		if((""+keyCharacter).matches("[A-Z]") && (""+plainCharacter).matches("[A-Z]") && !key.isEmpty()) {
+			Character a = plainCharacter;
+			int pa = a - 65;
+			Character dummy =key.get(pa);
+			int pc =key.indexOf(keyCharacter);
+			key.set(pa, keyCharacter);
+			key.set(pc, dummy);	
+		} 
+			
 	}
 	
 	public void swapLetters(Character a, Character b) {
@@ -114,7 +108,6 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		if(positionA != -1 && positionB != -1) {
 			key.set(positionA, b);
 			key.set(positionB, a);
-			System.out.println("swapped");
 		}	
 	}
 	
@@ -137,11 +130,6 @@ public class PermutationEncryption implements SymmetricEncryptor {
 				}
 				
 		}
-			System.out.println("-----Start-freqency-----");
-			for(Pair<Character,Integer> p: list) {
-				System.out.println("Buchstabe " + p.getKey()+" " + p.getValue());
-			}
-			
 		return list;
 	}
 		return null;
@@ -157,13 +145,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
 				if(c >= 0 && c< 26) {
 					list = addCount(list, array[i]);
 				} 
-		}
-			System.out.println("-----freqency-----");
-			for(Pair<Character,Integer> p: list) {
-				System.out.println("Buchstabe " + p.getKey()+" " + p.getValue());
-			}
-			
-			
+		}		
 		return list;
 	}
 		return null;
@@ -171,6 +153,9 @@ public class PermutationEncryption implements SymmetricEncryptor {
 	
 	public List<Character> estimateKey(String text) {
 		List<Pair<Character,Integer>> list = frequency(text);
+		if(list == null ||list.isEmpty()) {
+			return null;
+		}
 		List<Character> ekey = new ArrayList<Character>();
 		for(int i=0; i<26;i++) {
 			ekey.add((char) (65+i));
@@ -181,7 +166,6 @@ public class PermutationEncryption implements SymmetricEncryptor {
 			Character a = f[i];
 			int pa = a - 65;
 			ekey.set(pa, list.get(i).getKey());
-			System.out.println("Postion: " + pa +  "Key "+ list.get(i).getKey());
 		}
 		
 		List<Pair<Character,Integer>> startFrequency = startfrequency(text);
@@ -195,7 +179,6 @@ public class PermutationEncryption implements SymmetricEncryptor {
 			int pc =ekey.indexOf(startFrequency.get(i).getKey());
 			ekey.set(pa, startFrequency.get(i).getKey());
 			ekey.set(pc, dummy);
-			System.out.println("Postion: " + pa +  "Key "+ startFrequency.get(i).getKey());
 		}
 		
 		List<Pair<Character,Integer>> endFrequency = endfrequency(text);
@@ -209,15 +192,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
 			int pc =ekey.indexOf(endFrequency.get(i).getKey());
 			ekey.set(pa, endFrequency.get(i).getKey());
 			ekey.set(pc, dummy);
-			System.out.println("Postion: " + pa +  "Key "+ endFrequency.get(i).getKey());
 		}
-		
-		
-		System.out.println("---------ekey---------");
-		for(Character c: ekey) {
-			System.out.print(c +", ");
-		}
-		System.out.println("---------------------");
 		return ekey;
 	}
 	

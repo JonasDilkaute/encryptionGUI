@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import model.CaesarEncryption;
 import model.FrequencyData;
 import model.PermutationEncryption;
@@ -80,9 +81,8 @@ public class Controller  {
     @FXML
     private Label frequencyLabel;
     
-    private List<Character> key;
-    private ObservableList<FrequencyData> frequencyList= FXCollections.observableArrayList();;
-
+    private List<Character> key = new ArrayList<Character>();
+   
 	/**
 	 * sets up the application.
 	 */
@@ -90,27 +90,27 @@ public class Controller  {
 		enc = new PermutationEncryption(new ArrayList<Character>());
 		new TextFieldBuilder(new CaesarEncryption(1), caesarEncryptionField, caesarDecryptionField, caesarKeyField, true);	
 		new TextFieldBuilder(new VignereEncryption(c),vigenereEncryptionField, vigenereDecryptionField, vigenereKeyField, false);	
-		//new TextfieldBuilder2(new PermutationEncryption(new ArrayList<Character>()), permutationEncryptionField, permutationDecryptionField, permutationKeyField, true);
-		//new TableBuilder<FrequencyData>(analysisTable, frequencyList);
 		new AsymetricTextFieldBuilder(new RSAEncryption(), RSADecryptionField, RSAEncryptionField, new RsaKeyGenerator().generateRsaKeySet("Max Mustermann"));
 	}
 	
 	@FXML
     void analyse(ActionEvent event) {
-		key =enc.estimateKey(encryptedTextArea.getText());
-		enc.setKey(key);
-		keyTextField.setText(printKey());
-		List<Pair<Character,Integer>> list =enc.frequency(encryptedTextArea.getText());
-		String s="";
-		Collections.sort(list, Comparator.comparing(p->p.getValue()));
-		Collections.reverse(list);
-		for(Pair<Character,Integer> p: list) {
-			Character c= p.getKey();
-			Integer i = p.getValue();
-			
-			s = s+ " "+c + " frequency: " + i + "\n" ;
-		}
+		if(!encryptedTextArea.getText().isBlank()) {
+			key =enc.estimateKey(encryptedTextArea.getText());
+			enc.setKey(key);
+			keyTextField.setText(printKey());
+			List<Pair<Character,Integer>> list =enc.frequency(encryptedTextArea.getText());
+			String s="";
+			Collections.sort(list, Comparator.comparing(p->p.getValue()));
+			Collections.reverse(list);
+			for(Pair<Character,Integer> p: list) {
+				Character c= p.getKey();
+				Integer i = p.getValue();	
+				s = s+ " "+c + " frequency: " + i + "\n" ;
+			}
 		frequencyLabel.setText(s);
+		}
+		
 
     }
 
@@ -131,14 +131,15 @@ public class Controller  {
 
     @FXML
     void swap(ActionEvent event) {
-    	
-    	
-    	//enc.swapLetters(swapATextField.getText().charAt(0), swapBTextField.getText().charAt(0));
-    	enc.replace(swapATextField.getText().charAt(0), swapBTextField.getText().charAt(0));
-    	key = enc.getKey();
-    	keyTextField.setText(printKey());
-    	
-
+    	if(!swapATextField.getText().isBlank() && !swapBTextField.getText().isBlank() && !key.isEmpty()) {
+    		String a = swapATextField.getText();
+    		String b = swapBTextField.getText();
+    		if((""+a.charAt(0)).matches("[A-Z]") && (""+b.charAt(0)).matches("[A-Z]")) {
+    			enc.replace(swapATextField.getText().charAt(0), swapBTextField.getText().charAt(0));
+    			key = enc.getKey();
+    			keyTextField.setText(printKey());
+    		} 		
+    	} 
     }
     
     private String printKey() {

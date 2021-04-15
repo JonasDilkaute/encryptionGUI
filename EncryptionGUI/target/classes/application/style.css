@@ -1,0 +1,266 @@
+.root {
+	-fx-background-color:  #f5f5f5;
+	
+}
+.label-generate {
+	-fx-font-family: 'Consolas';
+	-fx-text-fill: #000000;
+	-fx-font-size: 20;
+	-fx-font-weight: bold;
+}
+.label-description {
+	-fx-font-family: 'Consolas';
+	-fx-text-fill: #000000;
+	-fx-font-size: 16;
+}
+
+.label-algorithm {
+	-fx-font-family: 'Consolas';
+	-fx-text-fill: #000000;
+	-fx-font-size: 20;
+}
+
+
+.button-test:hover  {
+	-fx-effect: dropshadow( three-pass-box , #000063 , 10 , 0 , 3 , 3 );
+}
+.button-test {
+	-fx-background-color:  none;
+	-fx-border-radius: 30;
+	-fx-border-color: #000063;
+	-fx-border-width: 4;
+	-fx-text-fill: #000063;
+}
+.button-test:pressed {
+	
+	-fx-background-color:  #000063;
+	-fx-background-radius: 30;
+	-fx-border-radius: 30;
+	-fx-border-color: #000063;
+	-fx-border-width: 4;
+	-fx-text-fill: #ffffff;
+	-fx-effect: none;
+}
+
+.button-test:selected  {
+	
+	-fx-background-color:  #000063;
+	-fx-background-radius: 30;
+	-fx-border-radius: 30;
+	-fx-border-color: #000063;
+	-fx-border-width: 4;
+	-fx-text-fill: #ffffff;
+	-fx-effect: none;
+}
+
+.button-test FontAwesomeIconView {
+	-fx-fill: #000063;
+}
+
+.button-test:pressed FontAwesomeIconView {
+	-fx-fill: #ffffff;
+}
+
+.button-test:selected FontAwesomeIconView {
+	-fx-fill: #ffffff;
+}
+
+
+
+.button-selector {
+	-fx-background-color: none;
+	-fx-font-size: 15;
+	-fx-effect: none;
+	-fx-font-weight: bold;
+	-fx-text-fill: #000000;
+}
+
+.button-selector:hover {
+	-fx-effect: dropshadow( three-pass-box , #000000 , 10 , 0 , 0 , 0 );
+	
+	
+}
+
+.button-selector:pressed {
+	-fx-effect: none;
+	-fx-background-color: #000000;
+	-fx-background-radius: 30;
+	-fx-text-fill: #ffffff;
+	-fx-underline: false;
+}
+
+
+
+.button-selector:pressed FontAwesomeIconView {
+	-fx-fill: #ffffff;
+}
+
+.button-selector:selected {
+	-fx-effect: none;
+	-fx-background-color: #000000;
+	-fx-background-radius: 30;
+	-fx-text-fill: #ffffff;
+	-fx-underline: false;
+}
+
+
+
+.button-selector:selected FontAwesomeIconView {
+	-fx-fill: #ffffff;
+}
+
+.pane-card {
+	-fx-background-color: #ffffff;
+	-fx-background-radius: 10;
+	-fx-effect: dropshadow( three-pass-box , #e4e4e4 , 10 , 0 , 10 , 10 );
+	
+}
+
+.pane-card:hover {
+	-fx-effect: dropshadow( three-pass-box , #e4e4e4 , 10 , 0 , 20 , 20 );
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:vertical:hover .thumb{
+	-fx-effect: dropshadow( three-pass-box , #000000 , 10 , 0 , 0 , 0 );
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #000000;
+    -fx-background-radius: 5;
+    -fx-border-color: transparent;
+    }
+    
+    
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+  -fx-background-color: null;
+  -fx-background-radius: 0;
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow,
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+  -fx-background-color: null;
+  -fx-background-radius: 0;
+  -fx-background-insets: 0;
+  -fx-padding: 0;
+  -fx-shape: null;
+}
+
+
+
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
+}
+.scroll-bar .decrement-arrow {
+    -fx-padding:1;
+    -fx-background-color:  transparent;
+ }
+.scroll-bar .increment-arrow {
+    -fx-padding:1;
+    -fx-background-color:  transparent;
+}
+.slider .thumb {
+	-fx-background-color: #6200ea;
+}
+
+.slider .track {
+	-fx-background-color: #000063;
+}
+
+
+
+.delete-button {
+	-fx-background-color: transparent;
+}
+
+.delete-button:hover {
+	-fx-effect: dropshadow( three-pass-box , #000000 , 10 , 0 , 3 , 3 );
+}
+
+
+.table-view .column-header .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-family: 'Consolas';
+    -fx-alignment: CENTER_LEFT;
+    -fx-font-size: 20;
+    -fx-font-weight: normal;
+    
+}
+
+
+.table-view .table-cell{ 
+    -fx-font-weight: bold; 
+    -fx-font-size: 18;    
+    -fx-text-fill: #000000;
+    -fx-font-family: 'Consolas';  
+} 
+
+.table-view .placeholder .label {
+	-fx-text-fill: transparent;
+}
+.table-view .column-header  {
+    -fx-background-color:  transparent;
+    -fx-pref-height: 30;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #000063;
+}
+
+.table-row-cell:selected  {
+	-fx-background-color:#6200ea ;
+	-fx-border-color: #6200ea;
+	-fx-text-fill: #ffffff;
+	
+}
+.table-row-cell {
+    -fx-cell-size: 43;
+}
+
+
+.table-view {
+	-fx-background-color: transparent;
+}
+
+
+
+
+.noheader .column-header-background {
+    -fx-max-height: 0;
+    -fx-pref-height: 0;
+    -fx-min-height: 0;
+}
+
+.noheader .placeholder .label {
+	-fx-text-fill: transparent;
+}
+
+TextField {
+	-fx-background-color: transparent;
+	-fx-border-color: #000063;
+	-fx-border-radius: 30;
+	-fx-border-width: 4;
+}
+
+TextField:hover {
+	
+}

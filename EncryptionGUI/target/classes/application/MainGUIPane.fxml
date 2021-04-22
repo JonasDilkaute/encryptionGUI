@@ -3,10 +3,15 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CustomMenuItem?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -28,7 +33,7 @@
                   <Insets left="20.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox layoutX="28.0" layoutY="14.0" prefHeight="286.0" prefWidth="200.0" spacing="10.0">
+            <VBox layoutX="28.0" layoutY="14.0" prefHeight="360.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <Label text="SYMMETRIC ENCRYPTION">
                      <font>
@@ -43,6 +48,7 @@
                         <ToggleButton fx:id="caesarButton" mnemonicParsing="false" onAction="#switchTab" styleClass="button-selector" text="CAESAR" />
                         <ToggleButton fx:id="vigenereButton" mnemonicParsing="false" onAction="#switchTab" styleClass="button-selector" text="VIGENERE" />
                         <ToggleButton fx:id="permutationButton" mnemonicParsing="false" onAction="#switchTab" styleClass="button-selector" text="PERMUTATION" />
+                        <ToggleButton fx:id="permutation1Button" mnemonicParsing="false" onAction="#switchTab" styleClass="button-selector" text="-&gt; ANALYSIS" />
                      </children>
                      <padding>
                         <Insets left="15.0" top="10.0" />
@@ -104,4 +110,40 @@
    <bottom>
       <AnchorPane prefHeight="43.0" prefWidth="1207.0" BorderPane.alignment="CENTER" />
    </bottom>
+   <center>
+      <MenuButton mnemonicParsing="false" stylesheets="@style.css" text="HABBO" BorderPane.alignment="CENTER">
+        <items>
+            <CustomMenuItem hideOnClick="false" mnemonicParsing="false" text="Unspecified Action">
+               <content>
+                  <VBox spacing="10.0">
+                     <children>
+                        <HBox spacing="5.0">
+                           <children>
+                              <Button mnemonicParsing="false" text="Hallo" />
+                              <Button mnemonicParsing="false" text="Halle" />
+                           </children>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </HBox>
+                        <TextField promptText="Replacement" />
+                        <HBox spacing="10.0">
+                           <children>
+                              <TextField />
+                              <TextField />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+            </CustomMenuItem>
+        </items>
+         <font>
+            <Font name="Consolas Bold" size="34.0" />
+         </font>
+         <tooltip>
+            <Tooltip autoFix="false" consumeAutoHidingEvents="false" hideOnEscape="false" text="TEST Tooltip" />
+         </tooltip>
+      </MenuButton>
+   </center>
 </BorderPane>

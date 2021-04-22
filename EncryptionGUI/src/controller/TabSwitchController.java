@@ -21,7 +21,7 @@ import view.ContentAble;
 public class TabSwitchController  implements Initializable{
 
     @FXML
-    private ToggleButton caesarButton, vigenereButton, rsaButton, permutationButton, aboutButton;
+    private ToggleButton caesarButton, vigenereButton, rsaButton, permutationButton, permutation1Button, aboutButton;
     
     @FXML
     private Button closeButton;
@@ -92,6 +92,7 @@ public class TabSwitchController  implements Initializable{
     	buttonList.add(vigenereButton);
     	buttonList.add(rsaButton);
     	buttonList.add(permutationButton);
+    	buttonList.add(permutation1Button);
     	buttonList.add(aboutButton);
     	
 	}

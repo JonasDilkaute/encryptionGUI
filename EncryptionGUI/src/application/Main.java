@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.AutoCorrector;
 import view.GUITabPane;
 import view.MoveHandler;
 import javafx.scene.Scene;

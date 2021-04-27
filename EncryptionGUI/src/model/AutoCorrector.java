@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -22,8 +23,8 @@ public class AutoCorrector {
 		langTool = new JLanguageTool(new GermanyGerman());
 	}
 	
-	public Map<String, Map<Integer, String>> getSuggestions (String text) {
-		Map<String, Map<Integer, String>> list = new HashMap<String, Map<Integer, String>>();
+	public Map<String, List<SuggestionData>> getSuggestions (String text) {
+		Map<String, List<SuggestionData>> list = new HashMap<String, List<SuggestionData>>();
 		List<RuleMatch> matches = new ArrayList<>();
 		try {
 			matches =langTool.check(text.toLowerCase());
@@ -34,33 +35,36 @@ public class AutoCorrector {
 			if(match.getType() == Type.UnknownWord && 
 		    		  match.getMessage().equalsIgnoreCase("Möglicher Tippfehler gefunden.")) {
 				String subString = text.substring(match.getFromPos(), match.getToPos());
-				Map<Integer, String> suggestions =filterSuggestions(match.getSuggestedReplacementObjects(), subString);
+				List<SuggestionData> suggestions =filterSuggestions(match.getSuggestedReplacementObjects(), subString);
 				list.put(subString, suggestions);
-			}
+			} 
 		}
 		return list;
 	}
 	
-	private Map<Integer, String> filterSuggestions(List<SuggestedReplacement> suggestions, String subText) {
+	private List<SuggestionData> filterSuggestions(List<SuggestedReplacement> suggestions, String subText) {
 		subText = subText.toLowerCase();
 		int minDistance = -1;
-		Map<Integer, String> filteredSuggestions = new HashMap<>();
+		List<SuggestionData> filteredSuggestions = new ArrayList<>();
 		for(SuggestedReplacement s : suggestions) {
-	    	  if(s.getReplacement().length() == subText.length()) {
+			String replacement = s.getReplacement();
+			//remove "Umlaute" from suggestions
+			PermutationUtils.prepareText(replacement);
+			  //make sure to include only suggestions that match the word length and suggestion is not just lower/upper writing
+	    	  if(replacement.length() == subText.length() ) {
 	    		
-	    		  String replacement = s.getReplacement().toLowerCase();
+	    		  replacement =replacement.toLowerCase();  		  
 	    		  int distance =calculateDistance(subText, replacement);
-	    		  
 	    		  minDistance = Math.min(minDistance, distance);
-	    		  filteredSuggestions.put(distance, replacement);
+	    		  filteredSuggestions.add(new SuggestionData(replacement, subText, distance));
 	    	  }	  
 	      }
-		Map<Integer, String> sortedMap = 
-			     filteredSuggestions.entrySet().stream()
-			    .sorted(Entry.comparingByValue())
-			    .collect(Collectors.toMap(Entry::getKey, Entry::getValue,
-			                              (e1, e2) -> e1, LinkedHashMap::new));
-		return sortedMap;
+		
+		//sort by distance
+		filteredSuggestions.sort(Comparator.comparing(SuggestionData::getDistance));
+		
+		return filteredSuggestions.size() >6 ? filteredSuggestions.subList(0, 5): filteredSuggestions;
+
 		
 	}
 

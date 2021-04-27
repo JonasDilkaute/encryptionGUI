@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
@@ -7,11 +8,13 @@
 
 <AnchorPane fx:id="Permutation1Pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="699.0" prefWidth="799.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane fx:id="analysePane" layoutX="21.0" layoutY="71.0" prefHeight="618.0" prefWidth="779.0" styleClass="pane-card">
+      <Pane fx:id="analysePane" layoutX="21.0" layoutY="71.0" prefHeight="551.0" prefWidth="779.0" styleClass="pane-card">
          <children>
-            <GridPane fx:id="analyseBox" layoutX="7.0" layoutY="6.0" prefHeight="597.0" prefWidth="741.0">
+            <GridPane fx:id="analyseBox" layoutX="7.0" layoutY="6.0" prefHeight="528.0" prefWidth="741.0">
             </GridPane>
          </children></Pane>
       <Label layoutX="21.0" layoutY="35.0" text="Entschlüsselung" />
+      <Button fx:id="previousButton" layoutX="38.0" layoutY="645.0" mnemonicParsing="false" onAction="#previousLines" styleClass="button-test" text="Vorherige" />
+      <Button fx:id="nextButton" layoutX="722.0" layoutY="645.0" mnemonicParsing="false" onAction="#nextLines" styleClass="button-test" text="Nächste" />
    </children>
 </AnchorPane>

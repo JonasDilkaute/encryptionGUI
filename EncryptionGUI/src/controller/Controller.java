@@ -29,6 +29,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import model.AutoCorrector;
 import model.CaesarEncryption;
 import model.FrequencyData;
@@ -36,6 +40,7 @@ import model.PermutationEncryption;
 import model.PermutationKey;
 import model.RSAEncryption;
 import model.RsaKeyGenerator;
+import model.SuggestionData;
 import model.VignereEncryption;
 import view.AsymetricTextFieldBuilder;
 import view.TextFieldBuilder;
@@ -84,10 +89,10 @@ public class Controller  {
     private Button analyseButton;
 
     @FXML
-    private Button swapButton;
+    private Button swapButton, previousButton, nextButton, replaceButton;
 
     @FXML
-    private TextField swapATextField, keyTextField;
+    private TextField swapATextField, keyTextField, replaceATextField, replaceBTextField;
 
     @FXML
     private TextField swapBTextField;
@@ -97,15 +102,19 @@ public class Controller  {
     @FXML
     private Label frequencyLabel;
     
-    //private List<Character> key = new ArrayList<Character>();
+    private int startWord =0;
     
     
+    //TODO Roadmap: undo button, mark correct words -> highlight in other words, previous/next button, fix replacing not properly working, add button for replace, 
+    //DONE: text area line break, improve auto-correction
    
 	/**
 	 * sets up the application.
 	 */
 	public void init() {
 		corrector = new AutoCorrector();
+		plainTextArea.setWrapText(true);
+		encryptedTextArea.setWrapText(true);
 		enc = new PermutationEncryption(new PermutationKey());
 		new TextFieldBuilder(new CaesarEncryption(1), caesarEncryptionField, caesarDecryptionField, caesarKeyField, true);	
 		new TextFieldBuilder(new VignereEncryption(c),vigenereEncryptionField, vigenereDecryptionField, vigenereKeyField, false);	
@@ -137,13 +146,35 @@ public class Controller  {
 
     }
 	
+	@FXML
+	void previousLines(ActionEvent event) {
+		startWord = Math.min(startWord -50, 0);
+		fillAnalysePane(plainTextArea.getText(), corrector.getSuggestions(plainTextArea.getText()));
+	}
 	
-	private void fillAnalysePane (String text, Map<String, Map<Integer, String>> suggestions) {
+	@FXML
+	void nextLines(ActionEvent event) {
+		startWord = startWord +50;
+		fillAnalysePane(plainTextArea.getText(), corrector.getSuggestions(plainTextArea.getText()));
+	}
+	
+	private void fillAnalysePane (String text, Map<String, List<SuggestionData>> suggestions) {
 		analyseBox.getChildren().clear();
+		GridPane.clearConstraints(analyseBox);
+		analyseBox.getColumnConstraints().clear();
+		analyseBox.getRowConstraints().clear();
 		String[] words = text.split(" ");
 		List<MenuButton> buttonList  = new ArrayList<MenuButton>();
 		for(String word: words) {
-			MenuButton button = new MenuButton(word);
+			MenuButton button = new MenuButton();
+			//TODO fix position, implement highlight logic
+			 Text t = new Text(word);
+			 Text t1 = new Text("w");
+			 t1.setFill(Color.DARKRED);
+		        TextFlow a = new TextFlow(t);
+		        a.getChildren().add(t1);
+		        a.setTextAlignment(TextAlignment.CENTER);
+			button.setGraphic(a);
 			VBox vbox = new VBox();
 			
 			int fromPos = text.indexOf(word);
@@ -151,20 +182,18 @@ public class Controller  {
 				
 				button.setTooltip(new Tooltip(encrypted));
 			if(suggestions.containsKey(word)) {
-				Map<Integer, String> s = suggestions.get(word);
+				List<SuggestionData> s = suggestions.get(word);
 				HBox suggestionBox = new HBox();
 				 
 				
 		
-				for (Map.Entry<Integer, String> pair : s.entrySet()) {
-					Button suggestion = new Button(pair.getValue());
+				for (SuggestionData suggestionData : s) {
+					Button suggestion = new Button(suggestionData.getSuggestion());
 					suggestion.setOnAction(new EventHandler<ActionEvent>() {
 						
 						@Override
 						public void handle(ActionEvent arg0) {
-							System.out.println(pair.getValue());
-							System.out.println(encrypted);
-							replaceWord(pair.getValue(), encrypted);
+							replaceWord(suggestionData.getSuggestion(), encrypted);
 							keyTextField.setText(printKey());
 							decrypt(printKey());
 							
@@ -185,7 +214,6 @@ public class Controller  {
 				@Override
 				public void handle(KeyEvent arg0) {
 					if (arg0.getCode().equals(KeyCode.ENTER)) {
-						System.out.println("dddtrt");
 						replaceWord(replacementTF.getText(), encrypted);
 						keyTextField.setText(printKey());
 						
@@ -220,7 +248,7 @@ public class Controller  {
         }
 		
 		
-		int i=0;
+		int i=startWord;
 		for(int y=0; y<10; y++) {
 			for(int x=0; x<5; x++) {
 				if(i < buttonList.size()) {
@@ -236,6 +264,20 @@ public class Controller  {
 		
 	}
 	
+	@FXML
+	void replace(ActionEvent event) {
+		if(replaceATextField.getText() != null && replaceBTextField.getText() != null) {
+			String a = replaceATextField.getText();
+			String b = replaceBTextField.getText();
+			if(!a.isEmpty() && !b.isEmpty()) {
+				enc.swapLetters(a.toCharArray()[0], b.toCharArray()[0]);
+				System.out.println(printKey());
+				keyTextField.setText(printKey());
+				decrypt(printKey());
+			}
+		}
+	}
+	
 	private void replaceWord(String word, String encrypted) {
 		word = word.toUpperCase();
 		encrypted = encrypted.toUpperCase();
@@ -247,6 +289,7 @@ public class Controller  {
 			char e = echars[i];
 			
 			enc.replace(w, e);
+			keyTextField.setText(printKey());
 		}
 	}
 	
@@ -287,7 +330,7 @@ public class Controller  {
     		String a = swapATextField.getText();
     		String b = swapBTextField.getText();
     		if((""+a.charAt(0)).matches("[A-Z]") && (""+b.charAt(0)).matches("[A-Z]")) {
-    			enc.replace(swapATextField.getText().charAt(0), swapBTextField.getText().charAt(0));
+    			enc.replace(swapBTextField.getText().charAt(0), swapATextField.getText().charAt(0));
     			keyTextField.setText(printKey());
     		} 		
     	} 

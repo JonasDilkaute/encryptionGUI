@@ -23,14 +23,11 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		setPermutationKey(permutationKey);
 	}
 	
- 	
  	@Override 
  	public String encrypt(String text) {
  		if(text!= null && !text.isEmpty()) {
  			text = text.toUpperCase();
-			text =text.replaceAll("Ä", "AE");
-			text =text.replaceAll("Ü", "UE");
-			text =text.replaceAll("Ö", "OE");
+ 			PermutationUtils.prepareText(text);
 			String newText = "";
 			
 			char[] array = text.toCharArray();
@@ -47,57 +44,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
  		return null;
  		
  	}
-	/*
-	@Override
-	public String encrypt(String text) {
-		
-		if(text!= null && !text.isBlank()) {
-			text = text.toUpperCase();
-			text =text.replaceAll("Ä", "AE");
-			text =text.replaceAll("Ü", "UE");
-			text =text.replaceAll("Ö", "OE");
-			String newText = "";
-			char[] array = text.toCharArray();
-			for(int i=0; i< array.length; i++) {
-				int c = (int) array[i] - 65;
-				if(c >= 0 && c< 26) {					
-					newText = newText + key.get(c);
-				} else {
-					newText = newText + array[i];
-				}		
-			}
-			return newText;
-		}
-		return null;
-	}
 
-*/
- 	/*
-	@Override
-	public String decrypt(String text) {
-		if(text!= null && !text.isBlank()) {
-			text = text.toUpperCase();
-			String newText = "";
-			char[] array = text.toCharArray();
-			for(int i=0; i< array.length; i++) {
-				int c = (int) array[i] - 65;
-				if(c >= 0 && c< 26) {
-					char newChar =(char) (key.indexOf(array[i]) +65);
-					//fail safe if key does not contain all characters 
-					newChar = newChar < 65 ? 'A': newChar;
-					newText = newText+ newChar;
-				} else {
-					newText = newText + array[i];
-				}
-				
-				
-			}
-			
-			return newText;
-		}
-		return null;
-	}
-	*/
 	@Override
 	public String decrypt(String text) {
 		if(text!= null && !text.isBlank()) {
@@ -230,53 +177,7 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		
 		return estKey;
 	}
-	/*
-	public List<Character> estimateKey(String text) {
-		List<Pair<Character,Integer>> list = frequency(text);
-		if(list == null ||list.isEmpty()) {
-			return null;
-		}
-		List<Character> ekey = new ArrayList<Character>();
-		for(int i=0; i<26;i++) {
-			ekey.add((char) (65+i));
-		}
-		Collections.sort(list, Comparator.comparing(p->p.getValue()));
-		Collections.reverse(list);
-		for(int i=0; i<list.size();i++) {
-			Character a = f[i];
-			int pa = a - 65;
-			ekey.set(pa, list.get(i).getKey());
-		}
-		
-		List<Pair<Character,Integer>> startFrequency = startfrequency(text);
-		Collections.sort(startFrequency, Comparator.comparing(p->p.getValue()));
-		Collections.reverse(startFrequency);
-		
-		for(int i=0; i<startF.length;i++) {
-			Character a = startF[i];
-			int pa = a - 65;
-			Character dummy =ekey.get(pa);
-			int pc =ekey.indexOf(startFrequency.get(i).getKey());
-			ekey.set(pa, startFrequency.get(i).getKey());
-			ekey.set(pc, dummy);
-		}
-		
-		List<Pair<Character,Integer>> endFrequency = endfrequency(text);
-		Collections.sort(endFrequency, Comparator.comparing(p->p.getValue()));
-		Collections.reverse(endFrequency);
-		
-		for(int i=0; i<Math.min (endF.length, endFrequency.size());i++) {
-			Character a = endF[i];
-			int pa = a - 65;
-			Character dummy =ekey.get(pa);
-			int pc =ekey.indexOf(endFrequency.get(i).getKey());
-			ekey.set(pa, endFrequency.get(i).getKey());
-			ekey.set(pc, dummy);
-		}
-		return ekey;
-	}
-	*/
-	
+
 	private static List<Pair<Character,Integer>> addCount(List<Pair<Character,Integer>> list,Character c) {
 		for(int i=0; i<list.size(); i++) {
 			Pair<Character,Integer> p = list.get(i);
@@ -289,17 +190,6 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		list.add(new Pair<Character,Integer>(c,1));
 		return list;
 	}
-	
-
-	/*
-	public void setKey(List<Character> key) {
-		this.key = key;
-	}
-	
-	public List<Character> getKey() {
-		return key;
-	}
-*/
 
 	/**
 	 * @return the permutationKey
@@ -308,7 +198,6 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		return permutationKey;
 	}
 
-
 	/**
 	 * @param permutationKey the permutationKey to set
 	 */
@@ -316,13 +205,11 @@ public class PermutationEncryption implements SymmetricEncryptor {
 		this.permutationKey = permutationKey;
 	}
 
-
 	@Override
 	public String encrypt(String text, String code) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public String decrypt(String text, String code) {

@@ -40,7 +40,7 @@ public class PermutationKey {
 		Character characterOfKey = key.get(plainKey);
 		
 		if(characterOfKey == null || keyOfEncrypted ==null) {
-			throw new IllegalArgumentException("plain key or encryptedCharacter arr not fitting");
+			throw new IllegalArgumentException("plain key or encryptedCharacter are not fitting");
 		} else if(
 			!key.replace(keyOfEncrypted, encryptedCharacter, characterOfKey) ||
 			!key.replace(plainKey, characterOfKey, encryptedCharacter)) {
@@ -55,7 +55,7 @@ public class PermutationKey {
 	 */
 	public void swapLetters(Character a, Character b) {
 		Character aKey = getKeyByValue(key, a);
-		Character bKey = getKeyByValue(key, a);
+		Character bKey = getKeyByValue(key, b);
 		if(aKey ==null || bKey ==null) {
 			throw new IllegalArgumentException("encrypted characters are not contained in the key");
 		}

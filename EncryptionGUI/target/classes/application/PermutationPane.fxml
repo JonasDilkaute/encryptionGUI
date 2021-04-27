@@ -72,11 +72,16 @@
             <Button fx:id="encryptButton" layoutX="14.0" layoutY="124.0" mnemonicParsing="false" onAction="#encrypt" styleClass="button-test" text="Verschlüsseln" />
             <Button fx:id="decryptButton" layoutX="120.0" layoutY="124.0" mnemonicParsing="false" onAction="#decrypt" styleClass="button-test" text="Entschlüsseln" />
             <Button fx:id="analyseButton" layoutX="222.0" layoutY="124.0" mnemonicParsing="false" onAction="#analyse" styleClass="button-test" text="Schnellanalyse" />
-            <Button fx:id="swapButton" layoutX="641.0" layoutY="124.0" mnemonicParsing="false" onAction="#swap" styleClass="button-test" text="Vertauschen" />
-            <TextField fx:id="swapATextField" layoutX="366.0" layoutY="124.0" prefHeight="33.0" prefWidth="69.0" promptText="Key " />
-            <TextField fx:id="swapBTextField" layoutX="478.0" layoutY="124.0" prefHeight="33.0" prefWidth="69.0" promptText="Plain" />
-            <Label layoutX="446.0" layoutY="132.0" text="soll " />
-            <Label layoutX="553.0" layoutY="124.0" prefHeight="33.0" prefWidth="69.0" text="entsprechen" />
+            <Button fx:id="swapButton" layoutX="640.0" layoutY="99.0" mnemonicParsing="false" onAction="#swap" styleClass="button-test" text="Vertauschen" />
+            <TextField fx:id="swapATextField" layoutX="361.0" layoutY="99.0" prefHeight="33.0" prefWidth="69.0" promptText="Key " />
+            <TextField fx:id="swapBTextField" layoutX="475.0" layoutY="99.0" prefHeight="33.0" prefWidth="69.0" promptText="Plain" />
+            <Label layoutX="443.0" layoutY="107.0" text="soll " />
+            <Label layoutX="555.0" layoutY="99.0" prefHeight="33.0" prefWidth="69.0" text="entsprechen" />
+            <TextField fx:id="replaceATextField" layoutX="361.0" layoutY="141.0" prefHeight="33.0" prefWidth="69.0" promptText="Plain" />
+            <Label layoutX="443.0" layoutY="149.0" text="soll " />
+            <TextField fx:id="replaceBTextField" layoutX="475.0" layoutY="141.0" prefHeight="33.0" prefWidth="69.0" promptText="new Plain" />
+            <Label layoutX="555.0" layoutY="141.0" prefHeight="33.0" prefWidth="69.0" text="entsprechen" />
+            <Button fx:id="replaceButton" layoutX="640.0" layoutY="141.0" mnemonicParsing="false" onAction="#replace" styleClass="button-test" text="Vertauschen" />
          </children>
       </Pane>
    </children>
